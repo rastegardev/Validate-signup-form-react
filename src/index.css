@@ -1,36 +1,69 @@
+@font-face {
+  font-family: "YekanBakh";
+  src: url("./assets/fonts/YekanBakhFaNum-Regular.woff") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  font-display: auto;
+}
+@font-face {
+  font-family: "YekanBakh";
+  src: url("./assets/fonts/YekanBakhFaNumBold.woff") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  font-display: auto;
+}
+@font-face {
+  font-family: "YekanBakh";
+  src: url("./assets/fonts/YekanBakhFaNum-Black.woff") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  font-display: auto;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-family-primary: "YekanBakh";
+}
+
 body {
-  margin: 0 auto;
-  max-width: 1200px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fc;
+  font-family: var(--font-family-primary);
+  background-size: contain;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-image: url(/src/assets/img/bg-blue.jpg);
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-body {
-  margin: 10px 20px;
-}
-
-button {
-  margin: 0 10px;
-  cursor: pointer;
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
+@media screen and (max-width: 768px) {
+  body {
+    margin: 10px;
+    display: block;
+  }
 }
 
 input {
-  cursor: pointer;
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
+  font-family: var(--font-family-primary);
+}
+button {
+  font-family: var(--font-family-primary);
+}
 
-  margin-bottom: 20px;
-  margin-left: 10px;
+.Toastify__toast-body {
+  font-family: var(--font-family-primary) !important;
 }
