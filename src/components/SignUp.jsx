@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { validate } from "./Validate";
+import { nofity } from "./Notification";
 
 const SignUp = () => {
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -20,17 +27,36 @@ const SignUp = () => {
     console.log(data);
   };
 
-  const [errors, setErrors] = useState({});
+  const focusHandler = (e) => {
+    setTouched({ ...touched, [e.target.name]: true });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (!Object.keys(errors).length) {
+      nofity("You singed in successfully", "success");
+      console.log(data);
+    } else {
+      nofity("Invalid data!", "error");
+      setTouched({
+        name: true,
+        email: true,
+        password: true,
+        confirmPassword: true,
+        isAccepted: true,
+      });
+    }
+  };
 
   useEffect(() => {
     setErrors(validate(data));
-    console.log(errors);
-  }, [data]);
+    // console.log(errors);
+  }, [data, touched]);
 
   return (
     <div>
       <h1>singup</h1>
-      <form>
+      <form onSubmit={submitHandler}>
         <div>
           <label>Name</label>
           <input
@@ -38,7 +64,9 @@ const SignUp = () => {
             name="name"
             value={data.name}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {errors.name && touched.name && <span>{errors.name}</span>}
         </div>
 
         <div>
@@ -48,7 +76,9 @@ const SignUp = () => {
             name="email"
             value={data.email}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {errors.email && touched.email && <span>{errors.email}</span>}
         </div>
 
         <div>
@@ -58,7 +88,11 @@ const SignUp = () => {
             name="password"
             value={data.password}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {errors.password && touched.password && (
+            <span>{errors.password}</span>
+          )}
         </div>
 
         <div>
@@ -68,7 +102,11 @@ const SignUp = () => {
             name="confirmPassword"
             value={data.confirmPassword}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {errors.confirmPassword && touched.confirmPassword && (
+            <span>{errors.confirmPassword}</span>
+          )}
         </div>
 
         <div>
@@ -78,7 +116,11 @@ const SignUp = () => {
             name="isAccepted"
             value={data.isAccepted}
             onChange={changeHandler}
+            onFocus={focusHandler}
           />
+          {errors.isAccepted && touched.isAccepted && (
+            <span>{errors.isAccepted}</span>
+          )}
         </div>
 
         <div>
@@ -86,6 +128,8 @@ const SignUp = () => {
           <button type="submit">Sing Up</button>
         </div>
       </form>
+
+      <ToastContainer />
     </div>
   );
 };
